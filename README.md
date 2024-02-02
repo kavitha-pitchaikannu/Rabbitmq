@@ -119,7 +119,31 @@ Direct Exchange:
 
 ================================================================
 Topics:
+	topic exchange can't have an arbitrary routing_key - it must be a list of words, delimited by dots. The words can be anything, but usually they specify some features connected to the message. 
+ 	The logic behind the topic exchange is similar to a direct one - a message sent with a particular routing key will be delivered to all the queues that are bound with a matching binding key. However there are two important special cases for binding keys:
 
+* (star) can substitute for exactly one word.
+# (hash) can substitute for zero or more words.
+![Alt text](image.png)
+
+Note:::::::::::::::::
+Topic exchange is powerful and can behave like other exchanges.
+
+1. When a queue is bound with "#" (hash) binding key - it will receive all the messages, regardless of the routing key - like in fanout exchange.
+
+2. When special characters "*" (star) and "#" (hash) aren't used in bindings, the topic exchange will behave just like a direct one.
+
+================================================================
+
+Headers Exchange:
+	Looks like direct exchange on steroids, it route based on the header values. 
+	It can be routed as direct exchange where the routing key does not have to be string, it can be integer or hash
+
+Note::::::::::::
+	Broadcasting - Fanout
+	Simple scenarios - Direct
+	Complex scenarios - Topics
+	Special Filtering - Headers
 
 ================================================================
 Remote Proceedure Call:
